@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'ecs_services'
+    ecs_sd_configs:
+      - region: ap-south-1
+        cluster: CipherSquare-Prod
+    relabel_configs:
+      - source_labels: [__meta_ecs_task_arn]
+        regex: ".*"
+        action: keep
